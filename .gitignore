@@ -1,0 +1,12 @@
+# Claude Code local configuration
+.claude/
+
+# GWT review contexts
+.gwt/
+
+# GWT worktree directory
+.worktree/
+
+# Python caches
+__pycache__/
+*.py[cod]
