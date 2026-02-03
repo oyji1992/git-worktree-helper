@@ -184,6 +184,7 @@ def cmd_setting(args):
     current_wt = config.get("worktreeDir", DEFAULT_CONFIG["worktreeDir"])
     print_colored(t("setting.worktree_dir"), "33")
     print(t("setting.current", value=current_wt))
+    print(t("setting.worktree_dir_tip"))
     try:
         new_val = input(t("setting.enter_new")).strip()
     except EOFError:

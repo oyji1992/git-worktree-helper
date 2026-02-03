@@ -32,7 +32,7 @@ DEFAULT_MODELS = {
 DEFAULT_CONFIG = {
     "configVersion": LATEST_CONFIG_VERSION,
     "mainBranch": "main",
-    "worktreeDir": ".worktree",
+    "worktreeDir": "..{sep}{repo_name}_wt",
     "submodules": [],
     "ui": {
         "lang": "auto"  # auto, zh, en

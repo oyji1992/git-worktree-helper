@@ -155,12 +155,20 @@ def cmd_new(args):
             return
 
     config = get_effective_config()
-    worktree_dir_name = config.get("worktreeDir", ".worktree")
+    worktree_dir_template = config.get("worktreeDir", ".worktree")
 
-    ensure_worktree_gitignore(repo_root, worktree_dir_name)
+    # Get repository name for path template
+    repo_name = os.path.basename(repo_root)
+    worktree_dir_name = worktree_dir_template.format(repo_name=repo_name, sep=os.sep)
+
+    # Handle relative paths starting with ../ (place worktree outside repo)
+    if worktree_dir_name.startswith(".." + os.sep) or worktree_dir_name.startswith("../"):
+        worktree_dir = os.path.normpath(os.path.join(repo_root, worktree_dir_name))
+    else:
+        worktree_dir = os.path.join(repo_root, worktree_dir_name)
+        ensure_worktree_gitignore(repo_root, worktree_dir_name)
 
     safe_branch_name = branch_name.replace("/", "-")
-    worktree_dir = os.path.join(repo_root, worktree_dir_name)
     new_path = os.path.join(worktree_dir, safe_branch_name)
 
     print_colored(
